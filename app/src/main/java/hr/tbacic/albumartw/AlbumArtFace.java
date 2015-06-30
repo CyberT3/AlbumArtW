@@ -71,30 +71,30 @@ public class AlbumArtFace extends CanvasWatchFaceService {
         static final int MSG_UPDATE_TIME = 0;
 
 
-        /* Asynchronous task to load the meetings from the content provider and
-        * report the number of meetings back using onMeetingsLoaded() */
-        private class LoadMeetingsTask extends AsyncTask<Void, Void, Integer> {
-            @Override
-            protected Integer doInBackground(Void... voids) {
-                long begin = System.currentTimeMillis();
-                Uri.Builder builder = WearableCalendarContract.Instances.CONTENT_URI.buildUpon();
-                ContentUris.appendId(builder, begin);
-                ContentUris.appendId(builder, begin + DateUtils.DAY_IN_MILLIS);
-                final Cursor cursor = getContentResolver() .query(builder.build(),
-                        null, null, null, null);
-                int numMeetings = cursor.getCount();
-                if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                    Log.v(TAG, "Num meetings: " + numMeetings);
-                }
-                return numMeetings;
-            }
-
-            @Override
-            protected void onPostExecute(Integer result) {
-        /* get the number of meetings and set the next timer tick */
-                onMeetingsLoaded(result);
-            }
-        }
+//        /* Asynchronous task to load the meetings from the content provider and
+//        * report the number of meetings back using onMeetingsLoaded() */
+//        private class LoadMeetingsTask extends AsyncTask<Void, Void, Integer> {
+//            @Override
+//            protected Integer doInBackground(Void... voids) {
+//                long begin = System.currentTimeMillis();
+//                Uri.Builder builder = WearableCalendarContract.Instances.CONTENT_URI.buildUpon();
+//                ContentUris.appendId(builder, begin);
+//                ContentUris.appendId(builder, begin + DateUtils.DAY_IN_MILLIS);
+//                final Cursor cursor = getContentResolver() .query(builder.build(),
+//                        null, null, null, null);
+//                int numMeetings = cursor.getCount();
+//                if (Log.isLoggable(TAG, Log.VERBOSE)) {
+//                    Log.v(TAG, "Num meetings: " + numMeetings);
+//                }
+//                return numMeetings;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Integer result) {
+//            /* get the number of meetings and set the next timer tick */
+//                onMeetingsLoaded(result);
+//            }
+//        }
 
         /**
          * Handler to update the time periodically in interactive mode.
